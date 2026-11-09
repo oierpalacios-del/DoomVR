@@ -2,15 +2,26 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool dead;
+    public void ChangeHealth(float amount)
+    {
+        StatsManager.Instance.currentHealth += amount;
+        if (StatsManager.Instance.currentHealth >= StatsManager.Instance.maxHealth)
+        {
+            StatsManager.Instance.currentHealth = StatsManager.Instance.maxHealth;
+        }
+        if (StatsManager.Instance.currentHealth <= 0)
+        {
+            dead = true;
+            gameObject.SetActive(false);
+        }
+    }
+    public bool IsDead()
+    {
+        return dead;
+    }
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        dead = false;
     }
 }
