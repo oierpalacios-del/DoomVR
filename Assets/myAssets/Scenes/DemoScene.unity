@@ -776,9 +776,11 @@ MonoBehaviour:
   stunTime: 0
   meeleDefense: 0
   speed: 2
+  ClimbSpeed: 0
   stamina: 0
   staminaSinItem: 0
   staminalimit: 120
+  jumpHeight: 0
   maxHealth: 120
   currentHealth: 120
 --- !u!4 &485360516
@@ -5101,7 +5103,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 9014170783777442264}
   thumbstickPressAction: {fileID: -60998027439631388, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  moveAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  moveThreshold: 0.1
   speed: 0
+  staminaCooldown: 1
+  staminaCooldownTimer: 0
   pulsado: 0
 --- !u!114 &9014170783777442271
 MonoBehaviour:

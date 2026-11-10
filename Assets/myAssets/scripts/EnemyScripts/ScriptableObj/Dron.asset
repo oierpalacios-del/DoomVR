@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e4df0266e5acb44a2e7f8e5acb7b13, type: 3}
+  m_Name: Dron
+  m_EditorClassIdentifier: 
+  nombreEnemigo: Dron
+  descripcionEnemigo: Es un dron
+  vidaMax: 20
+  vidaActual: 20
+  speed: 5
+  damageMin: 1
+  damageMax: 3
+  prefab: {fileID: 5124412079834851164, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}

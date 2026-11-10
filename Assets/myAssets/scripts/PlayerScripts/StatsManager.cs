@@ -15,11 +15,11 @@ public class StatsManager : MonoBehaviour
     public float meeleDefense;
     [Header("Movement Stats")]
     public float speed;
-    //public float ClimbSpeed;
+    public float ClimbSpeed;
     public float stamina;
     public float staminaSinItem;
     public float staminalimit;
-    //public float jumpHeight;
+    public float jumpHeight;
 
     [Header("Health Stats")]
     public float maxHealth;
@@ -56,20 +56,20 @@ public class StatsManager : MonoBehaviour
     }
     public void ChangeStamina(float amount)
     {
-        if (staminaSinItem < staminalimit)
+        if (stamina < staminalimit)
         {
-            staminaSinItem += amount;
-            UpdateStamina(amount);
+            stamina += amount;
+            //UpdateStamina(amount);
         }
         else
         {
-            staminaSinItem = staminalimit;
+            stamina = staminalimit;
         }
     }
-    //public void UpdateJumpForce(float amount)
-    //{
-        //jumpHeight += amount;
-    //}
+    public void UpdateJumpForce(float amount)
+    {
+        jumpHeight += amount;
+    }
     public void UpdateCurrentHealth(float amount)
     {
         player.ChangeHealth(amount);
