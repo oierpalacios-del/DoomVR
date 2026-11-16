@@ -10,20 +10,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference jumpAction; // NUEVO
     [SerializeField] private CharacterController controller;
     [SerializeField] private float moveThreshold = 0.1f;
-    [SerializeField] private float speed;
+    [SerializeField] private UIUpdater uiUpdater;
 
     // --- Sprint ---
     public float staminaCooldown = 1f;
     public float staminaCooldownTimer;
     [SerializeField] private bool pulsado;
     private bool agotado;
+    public bool corriendo;
 
     // --- Jump ---
-    [SerializeField] private float jumpSpeed = 5f;
     [SerializeField] private float groundCheckDistance = 0.1f;
     [SerializeField] private LayerMask groundLayer;
-    private float _verticalVelocity;
-    //private bool _isGrounded;
+    private float verticalVelocity;
 
     private ContinuousMoveProvider moveProvider;
 
@@ -31,7 +30,9 @@ public class PlayerMovement : MonoBehaviour
     {
         moveProvider = xrOrigin.GetComponentInChildren<ContinuousMoveProvider>();
         if (moveProvider == null)
+        {
             Debug.LogWarning("No se encontró ContinuousMoveProvider en el XR Origin.");
+        }
 
         pulsado = false;
         agotado = false;
@@ -50,7 +51,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (moveAction != null)
+        {
             moveAction.action.Enable();
+        }
 
         if (jumpAction != null)
         {
@@ -70,81 +73,90 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (jumpAction != null)
+        {
             jumpAction.action.performed -= OnJumpPerformed;
+        }
 
         pulsado = false;
     }
 
-    private void OnPressed(InputAction.CallbackContext ctx) => pulsado = true;
-    private void OnReleased(InputAction.CallbackContext ctx) => pulsado = false;
+    private void OnPressed(InputAction.CallbackContext ctx)
+    {
+        pulsado = true;
+    }
+    private void OnReleased(InputAction.CallbackContext ctx)
+    {
+        pulsado = false;
+    }
 
     // --- Jump ---
     private void OnJumpPerformed(InputAction.CallbackContext ctx)
     {
-        if (controller.isGrounded)
-            _verticalVelocity = jumpSpeed;
-    }
-
-    private bool IsGrounded()
-    {
-        // Raycast desde el XR Origin hacia abajo
-        return Physics.Raycast(
-            xrOrigin.transform.position,
-            Vector3.down,
-            groundCheckDistance,
-            groundLayer
-        );
+        if (controller.isGrounded && StatsManager.Instance.stamina >= 5)
+        {
+            verticalVelocity = StatsManager.Instance.jumpSpeed;
+            StatsManager.Instance.ChangeStamina(-5);
+        } 
     }
 
     private void Update()
     {
-        if (moveProvider == null) return;
-
-        speed = StatsManager.Instance.speed;
+        if (moveProvider == null)
+        {
+            return;
+        }
 
         // --- Sprint (sin cambios) ---
         if (staminaCooldownTimer > 0)
+        {
             staminaCooldownTimer -= Time.deltaTime;
+        }
 
-        float stamina = StatsManager.Instance.stamina;
 
-        if (stamina <= 0) agotado = true;
-        if (agotado && stamina >= 20f) agotado = false;
+        if (StatsManager.Instance.stamina <= 0)
+        {
+            agotado = true;
+        }
+        if (agotado && StatsManager.Instance.stamina >= 20f)
+        {
+            agotado = false;
+        }
 
-        bool moviendose = moveAction != null &&
-                          moveAction.action.ReadValue<Vector2>().magnitude > moveThreshold;
-        bool corriendo = pulsado && moviendose && !agotado && stamina > 0;
+        bool moviendose = moveAction != null && moveAction.action.ReadValue<Vector2>().magnitude > moveThreshold;
+        corriendo = pulsado && moviendose && !agotado && StatsManager.Instance.stamina > 0;
 
-        moveProvider.moveSpeed = corriendo ? 2f * speed : speed;
+        moveProvider.moveSpeed = corriendo ? 2f * StatsManager.Instance.speed : StatsManager.Instance.speed;
 
         if (staminaCooldownTimer <= 0)
         {
             if (corriendo)
             {
-                float gasto = Mathf.Min(3f, stamina);
-                StatsManager.Instance.ChangeStamina(-gasto);
+                StatsManager.Instance.ChangeStamina(-3);
                 staminaCooldownTimer = staminaCooldown;
             }
-            else if (stamina < StatsManager.Instance.staminalimit)
+            else if (StatsManager.Instance.stamina < StatsManager.Instance.staminalimit)
             {
-                float recuperacion = Mathf.Min(2f, StatsManager.Instance.staminalimit - stamina);
-                StatsManager.Instance.ChangeStamina(recuperacion);
+                StatsManager.Instance.ChangeStamina(1);
                 staminaCooldownTimer = staminaCooldown;
             }
         }
 
         // --- Jump ---
-        //_isGrounded = IsGrounded();
 
         // Gravedad
         if (!controller.isGrounded)
-            _verticalVelocity += Physics.gravity.y * Time.deltaTime;
-        else
-            _verticalVelocity = 0f;
-
-        if (Mathf.Abs(_verticalVelocity) > 0.001f)
         {
-            controller.Move(Vector3.up * _verticalVelocity * Time.deltaTime);
+            verticalVelocity += Physics.gravity.y * Time.deltaTime;
         }
+        else
+        {
+            verticalVelocity = 0f;
+        }
+
+        if (Mathf.Abs(verticalVelocity) > 0.001f)
+        {
+            controller.Move(Vector3.up * verticalVelocity * Time.deltaTime);
+        }
+        uiUpdater.UpdateStamina(StatsManager.Instance.stamina, StatsManager.Instance.staminalimit);
     }
 }   

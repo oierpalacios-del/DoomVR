@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -779,11 +779,11 @@ MonoBehaviour:
   stunTime: 0
   meeleDefense: 0
   speed: 2
-  ClimbSpeed: 0
-  stamina: 0
+  ClimbSpeed: 5
+  stamina: 120
   staminaSinItem: 0
   staminalimit: 120
-  jumpHeight: 0
+  jumpSpeed: 5
   maxHealth: 120
   currentHealth: 120
 --- !u!4 &485360516
@@ -3678,10 +3678,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1420961837995846264, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: uiUpdater
+      value: 
+      objectReference: {fileID: 1208713217655369620}
     - target: {fileID: 1937570934422715647, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
+    - target: {fileID: 3961898468330755412, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: uiUpdater
+      value: 
+      objectReference: {fileID: 1208713217655369620}
     - target: {fileID: 7545296846328095610, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3725,8 +3733,76 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2825344721986304800, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1208713217655369620}
   m_SourcePrefab: {fileID: 100100000, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+--- !u!1 &1208713217655369619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2825344721986304800, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+  m_PrefabInstance: {fileID: 1208713217655369618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1208713217655369620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208713217655369619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f396fe7f5a1b8574c9439a22f5320c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthText: {fileID: 1208713217655369624}
+  municionText: {fileID: 1208713217655369623}
+  granadasText: {fileID: 1208713217655369622}
+  staminaText: {fileID: 1208713217655369621}
+--- !u!114 &1208713217655369621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7269920778240339454, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+  m_PrefabInstance: {fileID: 1208713217655369618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1208713217655369622 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3875968425910541640, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+  m_PrefabInstance: {fileID: 1208713217655369618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1208713217655369623 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 913994544384723647, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+  m_PrefabInstance: {fileID: 1208713217655369618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1208713217655369624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9125785516177027723, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+  m_PrefabInstance: {fileID: 1208713217655369618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3127728407676174906
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public bool dead;
-    public void ChangeHealth(float amount)
+    [SerializeField] private UIUpdater uiUpdater;
+    public void ChangeHealth(int amount)
     {
         StatsManager.Instance.currentHealth += amount;
         if (StatsManager.Instance.currentHealth >= StatsManager.Instance.maxHealth)
@@ -15,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
             dead = true;
             gameObject.SetActive(false);
         }
+        uiUpdater.UpdateVida(StatsManager.Instance.currentHealth, StatsManager.Instance.maxHealth);
     }
     public bool IsDead()
     {
