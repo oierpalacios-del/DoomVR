@@ -10,5 +10,7 @@ public class EnemyData : ScriptableObject
     public float speed;
     public int damageMin;
     public int damageMax;
+    public float detectRange;
+    public float stopRange;
     public GameObject prefab;
 }

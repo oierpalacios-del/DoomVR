@@ -16,7 +16,9 @@ MonoBehaviour:
   descripcionEnemigo: Es un dron
   vidaMax: 20
   vidaActual: 20
-  speed: 5
+  speed: 3
   damageMin: 1
   damageMax: 3
+  detectRange: 10
+  stopRange: 1
   prefab: {fileID: 5124412079834851164, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}

@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class EnemyBehaivor : MonoBehaviour
 {
-    public float speed = 3f;
-    public float detectRange = 10f;
-    public float stopRange = 1f;
-
+    public EnemyData enemyData;
     private Transform player;
 
     void Start()
@@ -21,10 +18,10 @@ public class EnemyBehaivor : MonoBehaviour
         if (player != null)
         {
             float dist = Vector3.Distance(transform.position, player.position);
-            if (dist > stopRange && dist < detectRange)
+            if (dist > enemyData.stopRange && dist < enemyData.detectRange)
             {
                 transform.position = Vector3.MoveTowards(
-                    transform.position, player.position, speed * Time.deltaTime);
+                    transform.position, player.position, enemyData.speed * Time.deltaTime);
                 transform.LookAt(player);
             }
         }
