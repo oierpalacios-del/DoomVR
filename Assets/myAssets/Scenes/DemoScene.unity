@@ -412,6 +412,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -24.6
       objectReference: {fileID: 0}
+    - target: {fileID: 6219902843990209629, guid: 3e07eccb5e6f459d886de95044adb1d9, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895887226161143353, guid: 3e07eccb5e6f459d886de95044adb1d9, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5104,11 +5112,18 @@ MonoBehaviour:
   xrOrigin: {fileID: 9014170783777442264}
   thumbstickPressAction: {fileID: -60998027439631388, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   moveAction: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  jumpAction: {fileID: 3186384995101916400, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  controller: {fileID: 9014170783777442277}
   moveThreshold: 0.1
   speed: 0
   staminaCooldown: 1
   staminaCooldownTimer: 0
   pulsado: 0
+  jumpSpeed: 5
+  groundCheckDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &9014170783777442271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5156,6 +5171,11 @@ MonoBehaviour:
 --- !u!4 &9014170783777442274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 9014170783777442263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &9014170783777442277 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
   m_PrefabInstance: {fileID: 9014170783777442263}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &9108292829394508247

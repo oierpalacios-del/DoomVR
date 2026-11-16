@@ -6,23 +6,33 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private GameObject xrOrigin;
     [SerializeField] private InputActionReference thumbstickPressAction;
-    [SerializeField] private InputActionReference moveAction; // NUEVO: la acción Vector2 del joystick de movimiento
-    [SerializeField] private float moveThreshold = 0.1f;      // NUEVO: zona muerta para considerar que te mueves
+    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference jumpAction; // NUEVO
+    [SerializeField] private CharacterController controller;
+    [SerializeField] private float moveThreshold = 0.1f;
     [SerializeField] private float speed;
 
+    // --- Sprint ---
     public float staminaCooldown = 1f;
     public float staminaCooldownTimer;
     [SerializeField] private bool pulsado;
     private bool agotado;
+
+    // --- Jump ---
+    [SerializeField] private float jumpSpeed = 5f;
+    [SerializeField] private float groundCheckDistance = 0.1f;
+    [SerializeField] private LayerMask groundLayer;
+    private float _verticalVelocity;
+    //private bool _isGrounded;
+
     private ContinuousMoveProvider moveProvider;
 
     private void Start()
     {
         moveProvider = xrOrigin.GetComponentInChildren<ContinuousMoveProvider>();
         if (moveProvider == null)
-        {
             Debug.LogWarning("No se encontró ContinuousMoveProvider en el XR Origin.");
-        }
+
         pulsado = false;
         agotado = false;
         staminaCooldownTimer = staminaCooldown;
@@ -41,6 +51,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveAction != null)
             moveAction.action.Enable();
+
+        if (jumpAction != null)
+        {
+            jumpAction.action.Enable();
+            jumpAction.action.performed += OnJumpPerformed;
+        }
     }
 
     private void OnDisable()
@@ -52,17 +68,32 @@ public class PlayerMovement : MonoBehaviour
             action.performed -= OnPressed;
             action.canceled -= OnReleased;
         }
+
+        if (jumpAction != null)
+            jumpAction.action.performed -= OnJumpPerformed;
+
         pulsado = false;
     }
 
-    private void OnPressed(InputAction.CallbackContext ctx)
+    private void OnPressed(InputAction.CallbackContext ctx) => pulsado = true;
+    private void OnReleased(InputAction.CallbackContext ctx) => pulsado = false;
+
+    // --- Jump ---
+    private void OnJumpPerformed(InputAction.CallbackContext ctx)
     {
-        pulsado = true;
+        if (controller.isGrounded)
+            _verticalVelocity = jumpSpeed;
     }
 
-    private void OnReleased(InputAction.CallbackContext ctx)
+    private bool IsGrounded()
     {
-        pulsado = false;
+        // Raycast desde el XR Origin hacia abajo
+        return Physics.Raycast(
+            xrOrigin.transform.position,
+            Vector3.down,
+            groundCheckDistance,
+            groundLayer
+        );
     }
 
     private void Update()
@@ -71,21 +102,17 @@ public class PlayerMovement : MonoBehaviour
 
         speed = StatsManager.Instance.speed;
 
+        // --- Sprint (sin cambios) ---
         if (staminaCooldownTimer > 0)
             staminaCooldownTimer -= Time.deltaTime;
 
         float stamina = StatsManager.Instance.stamina;
 
-        if (stamina <= 0)
-            agotado = true;
+        if (stamina <= 0) agotado = true;
+        if (agotado && stamina >= 20f) agotado = false;
 
-        if (agotado && stamina >= 20f)
-            agotado = false;
-
-        // NUEVO: solo cuenta como "moviéndose" si el joystick supera la zona muerta
         bool moviendose = moveAction != null &&
                           moveAction.action.ReadValue<Vector2>().magnitude > moveThreshold;
-
         bool corriendo = pulsado && moviendose && !agotado && stamina > 0;
 
         moveProvider.moveSpeed = corriendo ? 2f * speed : speed;
@@ -94,18 +121,30 @@ public class PlayerMovement : MonoBehaviour
         {
             if (corriendo)
             {
-                // NUEVO: nunca restar más de lo que queda, así no baja de 0
                 float gasto = Mathf.Min(3f, stamina);
                 StatsManager.Instance.ChangeStamina(-gasto);
                 staminaCooldownTimer = staminaCooldown;
             }
             else if (stamina < StatsManager.Instance.staminalimit)
             {
-                // NUEVO: nunca sumar más de lo que falta para el límite
                 float recuperacion = Mathf.Min(2f, StatsManager.Instance.staminalimit - stamina);
                 StatsManager.Instance.ChangeStamina(recuperacion);
                 staminaCooldownTimer = staminaCooldown;
             }
         }
+
+        // --- Jump ---
+        //_isGrounded = IsGrounded();
+
+        // Gravedad
+        if (!controller.isGrounded)
+            _verticalVelocity += Physics.gravity.y * Time.deltaTime;
+        else
+            _verticalVelocity = 0f;
+
+        if (Mathf.Abs(_verticalVelocity) > 0.001f)
+        {
+            controller.Move(Vector3.up * _verticalVelocity * Time.deltaTime);
+        }
     }
-}
+}   
