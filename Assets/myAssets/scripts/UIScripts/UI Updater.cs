@@ -14,4 +14,12 @@ public class UIUpdater : MonoBehaviour
     {
         healthText.text = "Vida:    " + vida + " / " + max;
     }
+    public void UpdateGranadas(int granadas)
+    {
+        granadasText.text = "Granadas:    " + granadas;
+    }
+    public void UpdateMunicion(int municion, int max)
+    {
+        municionText.text = "Municion:    " + municion + " / " + max;
+    }
 }

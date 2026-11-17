@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     public bool corriendo;
 
     // --- Jump ---
-    [SerializeField] private float groundCheckDistance = 0.1f;
     [SerializeField] private LayerMask groundLayer;
     private float verticalVelocity;
 
