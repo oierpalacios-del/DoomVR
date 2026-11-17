@@ -7,6 +7,9 @@ public class FollowLeftController : MonoBehaviour
     [SerializeField] private Quaternion rotationOffset = Quaternion.Euler(0, -90, 0);
     [SerializeField] private Vector3 positionOffset = Vector3.zero;
 
+    [Header("Ignorar colisión con este objeto")]
+    [SerializeField] private GameObject objetoIgnorado;
+
     private Collider[] colliders;
     private Renderer[] renderers;
     private bool isActive = false;
@@ -22,21 +25,17 @@ public class FollowLeftController : MonoBehaviour
     {
         if (leftController == null) return;
 
-        // Copiar posición y rotación
         transform.position = leftController.position + leftController.rotation * positionOffset;
         transform.rotation = leftController.rotation * rotationOffset;
 
-        // Detectar trigger del controlador izquierdo
         InputDevice device = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         bool triggerPressed = false;
-
         if (device.isValid)
         {
             device.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue);
-            triggerPressed = triggerValue > 0.1f; // Umbral para evitar ruido
+            triggerPressed = triggerValue > 0.1f;
         }
 
-        // Activar/desactivar solo si cambia el estado
         if (triggerPressed != isActive)
         {
             isActive = triggerPressed;
@@ -48,6 +47,17 @@ public class FollowLeftController : MonoBehaviour
     {
         foreach (var c in colliders)
             c.enabled = active;
+
+        // Ignorar colisión solo con el objeto asignado
+        if (objetoIgnorado != null)
+        {
+            Collider otherCollider = objetoIgnorado.GetComponent<Collider>();
+            if (otherCollider != null)
+            {
+                foreach (var c in colliders)
+                    Physics.IgnoreCollision(c, otherCollider, true);
+            }
+        }
 
         foreach (var r in renderers)
             r.enabled = active;
