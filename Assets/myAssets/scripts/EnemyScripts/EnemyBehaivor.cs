@@ -37,17 +37,14 @@ public class EnemyBehaivor : MonoBehaviour
         if (collision.gameObject.CompareTag("bullet"))
         {
             this.enemyData.vidaActual -= 1;
-        }
-        else if (collision.gameObject.CompareTag("Player"))
-        {
-            int damage = Random.Range(enemyData.damageMin, enemyData.damageMax);
-            collision.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+            Destroy(collision.gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag.Equals("Player"))
         {
             int damage = Random.Range(enemyData.damageMin, enemyData.damageMax);
             other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
