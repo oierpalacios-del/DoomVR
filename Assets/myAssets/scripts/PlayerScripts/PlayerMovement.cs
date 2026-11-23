@@ -150,9 +150,13 @@ public class PlayerMovement : MonoBehaviour
             verticalVelocity = -2f;
         }
 
-        if (jumpRequested)
+        if (jumpRequested && StatsManager.Instance.stamina >= 0)
         {
             verticalVelocity = StatsManager.Instance.jumpSpeed;
+            jumpRequested = false;
+        }
+        if (!controller.isGrounded)
+        {
             jumpRequested = false;
         }
 
