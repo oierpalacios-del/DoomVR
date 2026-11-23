@@ -32,11 +32,12 @@ public class VRGun : MonoBehaviour
 
         if (bulletPrefab == null || muzzle == null)
             return;
-
+        Vector3 extraRotation = new Vector3(270f, 0f, 0f);
+        Quaternion rotation = Quaternion.Euler(extraRotation) * muzzle.rotation;
         GameObject bullet = Instantiate(
             bulletPrefab,
             muzzle.position,
-            muzzle.rotation
+            rotation
         );
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -47,24 +48,4 @@ public class VRGun : MonoBehaviour
         Destroy(bullet, 5f);
     }
 
-    public void Shoot()
-    {
-        Debug.Log("¡DISPARO ACTIVADO!");
-
-        if (bulletPrefab == null || muzzle == null)
-            return;
-
-        GameObject bullet = Instantiate(
-            bulletPrefab,
-            muzzle.position,
-            muzzle.rotation
-        );
-
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-
-        if (rb != null)
-            rb.linearVelocity = muzzle.forward * bulletSpeed;
-
-        Destroy(bullet, 5f);
-    }
 }
