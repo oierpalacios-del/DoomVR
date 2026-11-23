@@ -26,5 +26,18 @@ public class EnemyBehaivor : MonoBehaviour
             }
         }
 
+        if(enemyData.vidaActual <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("bullet"))
+        {
+            this.enemyData.vidaActual -= 1;
+        }
     }
 }

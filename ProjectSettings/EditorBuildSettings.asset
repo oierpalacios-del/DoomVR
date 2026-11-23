@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/myAssets/Scenes/DemoScene.unity
     guid: 319dafa5c80f29f428dc1e0d03f04177
-  - enabled: 0
+  - enabled: 1
     path: Assets/myAssets/Scenes/Erik.unity
     guid: baa604e67c90e0c4fb3798ba8b6aae1d
   - enabled: 0
     path: Assets/myAssets/Scenes/Oier.unity
     guid: 6b0c35122dee3e349aa460a42ebbac9a
-  - enabled: 1
+  - enabled: 0
     path: Assets/myAssets/Scenes/Lorena.unity
     guid: f07f0bb50faca244a9ee614e83eff2b4
   m_configObjects:

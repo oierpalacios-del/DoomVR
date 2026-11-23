@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombreEnemigo: Dron
   descripcionEnemigo: Es un dron
-  vidaMax: 20
-  vidaActual: 20
+  vidaMax: 3
+  vidaActual: 3
   speed: 3
   damageMin: 1
   damageMax: 3
