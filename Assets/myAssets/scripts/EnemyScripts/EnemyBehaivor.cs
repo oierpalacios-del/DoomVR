@@ -9,7 +9,6 @@ public class EnemyBehaivor : MonoBehaviour
     {
 
     }
-
     void Update()
     {
         if (player == null)
@@ -38,6 +37,11 @@ public class EnemyBehaivor : MonoBehaviour
         if (collision.gameObject.CompareTag("bullet"))
         {
             this.enemyData.vidaActual -= 1;
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            int damage = Random.Range(enemyData.damageMin, enemyData.damageMax);
+            collision.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
         }
     }
 }
