@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
+    - target: {fileID: 1937570934422715647, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7545296846328095610, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.25982803
@@ -349,7 +353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7545296846328095610, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.7635465
+      value: -1.552
       objectReference: {fileID: 0}
     - target: {fileID: 7545296846328095610, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -385,7 +389,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7545296846328095610, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       insertIndex: 0
       addedObject: {fileID: 2139822815}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1937570934422715647, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 742970511}
   m_SourcePrefab: {fileID: 100100000, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
 --- !u!1 &742970508 stripped
 GameObject:
@@ -402,6 +409,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7545296846328095610, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
   m_PrefabInstance: {fileID: 742970507}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &742970511
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742970508}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.49288732
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &1343098303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -607,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7850819154157411914, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.2
+      value: -5.86
       objectReference: {fileID: 0}
     - target: {fileID: 7850819154157411914, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
       propertyPath: m_LocalRotation.w

@@ -44,4 +44,13 @@ public class EnemyBehaivor : MonoBehaviour
             collision.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            int damage = Random.Range(enemyData.damageMin, enemyData.damageMax);
+            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+        }
+    }
 }
