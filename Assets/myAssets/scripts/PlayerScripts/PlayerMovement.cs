@@ -89,13 +89,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // --- Jump ---
+    private bool jumpRequested;
+
     private void OnJumpPerformed(InputAction.CallbackContext ctx)
     {
         if (controller.isGrounded && StatsManager.Instance.stamina >= 5)
         {
-            verticalVelocity = StatsManager.Instance.jumpSpeed;
+            jumpRequested = true;
             StatsManager.Instance.ChangeStamina(-5);
-        } 
+        }
     }
 
     private void Update()
@@ -143,19 +145,20 @@ public class PlayerMovement : MonoBehaviour
         // --- Jump ---
 
         // Gravedad
-        if (!controller.isGrounded)
+        if (controller.isGrounded && verticalVelocity < 0f)
         {
-            verticalVelocity += Physics.gravity.y * Time.deltaTime;
-        }
-        else
-        {
-            verticalVelocity = 0f;
+            verticalVelocity = -2f;
         }
 
-        if (Mathf.Abs(verticalVelocity) > 0.001f)
+        if (jumpRequested)
         {
-            controller.Move(Vector3.up * verticalVelocity * Time.deltaTime);
+            verticalVelocity = StatsManager.Instance.jumpSpeed;
+            jumpRequested = false;
         }
+
+        verticalVelocity += Physics.gravity.y * Time.deltaTime;
+
+        controller.Move(Vector3.up * verticalVelocity * Time.deltaTime);
         uiUpdater.UpdateStamina(StatsManager.Instance.stamina, StatsManager.Instance.staminalimit);
     }
 }   
