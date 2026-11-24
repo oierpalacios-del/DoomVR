@@ -21,4 +21,5 @@ MonoBehaviour:
   damageMax: 3
   detectRange: 10
   stopRange: 1
-  prefab: {fileID: 5124412079834851164, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
+  prefab: {fileID: 7850819154157568618, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
+  vuela: 1

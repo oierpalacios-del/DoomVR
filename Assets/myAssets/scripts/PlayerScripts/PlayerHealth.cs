@@ -17,7 +17,6 @@ public class PlayerHealth : MonoBehaviour
             gameObject.SetActive(false);
         }
         uiUpdater.UpdateVida(StatsManager.Instance.currentHealth, StatsManager.Instance.maxHealth);
-        Debug.Log(StatsManager.Instance.currentHealth);
     }
     public bool IsDead()
     {

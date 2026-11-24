@@ -5,12 +5,19 @@ public class EnemyBehaivor : MonoBehaviour
     public EnemyData enemyData;
     private Transform player;
 
+    float attackTimer = 1f;
+    float attackTimerCooldown;
+
     void Start()
     {
-
+        attackTimerCooldown = attackTimer;
     }
     void Update()
     {
+        if(attackTimerCooldown >= 0)
+        {
+            attackTimerCooldown -= Time.deltaTime;
+        }
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -41,13 +48,16 @@ public class EnemyBehaivor : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag.Equals("Player"))
+        if (attackTimerCooldown <= 0)
         {
-            int damage = Random.Range(enemyData.damageMin, enemyData.damageMax);
-            other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+            attackTimerCooldown = attackTimer;
+            if (other.gameObject.tag.Equals("Player"))
+            {
+                int damage = Random.Range(enemyData.damageMin, enemyData.damageMax);
+                other.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+            }
         }
     }
 }
