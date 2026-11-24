@@ -19,4 +19,7 @@ MonoBehaviour:
   speed: 3
   damageMin: 5
   damageMax: 2
+  detectRange: 120
+  stopRange: 3
   prefab: {fileID: 957289647587071622, guid: 94f35b288c010c742b3ac4aff08f3f93, type: 3}
+  vuela: 0

@@ -14,4 +14,5 @@ public class EnemyData : ScriptableObject
     public float stopRange;
     public GameObject prefab;
     public bool vuela;
+    public bool dispara;
 }

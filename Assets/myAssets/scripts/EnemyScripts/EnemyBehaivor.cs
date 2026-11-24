@@ -1,12 +1,16 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBehaivor : MonoBehaviour
 {
     public EnemyData enemyData;
     private Transform player;
 
+    [SerializeField] private NavMeshAgent agent;
+    
     float attackTimer = 1f;
     float attackTimerCooldown;
+    float dist;
 
     void Start()
     {
@@ -20,30 +24,40 @@ public class EnemyBehaivor : MonoBehaviour
         }
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        if (player != null)
+        dist = Vector3.Distance(transform.position, player.position);
+        if (enemyData.vuela)
         {
-            float dist = Vector3.Distance(transform.position, player.position);
-            if (dist > enemyData.stopRange && dist < enemyData.detectRange)
+            if (player != null)
             {
-                transform.position = Vector3.MoveTowards(
-                    transform.position, player.position, enemyData.speed * Time.deltaTime);
-                transform.LookAt(player);
+                if (dist > enemyData.stopRange && dist < enemyData.detectRange)
+                {
+                    transform.position = Vector3.MoveTowards(
+                        transform.position, player.position, enemyData.speed * Time.deltaTime);
+                    transform.LookAt(player);
+                }
             }
         }
-
-        if(enemyData.vidaActual <= 0)
+        else
+        {
+            if (player != null && dist > enemyData.stopRange && dist < enemyData.detectRange)
+            {
+                agent.SetDestination(player.position);
+            }
+        }
+    }
+    public void TakeDamage(int amount)
+    {
+        enemyData.vidaActual += amount;
+        if (enemyData.vidaActual <= 0)
         {
             Destroy(gameObject);
         }
-
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("bullet"))
         {
-            this.enemyData.vidaActual -= 1;
+            TakeDamage(-1);
             Destroy(collision.gameObject);
         }
     }

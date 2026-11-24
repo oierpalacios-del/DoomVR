@@ -7,17 +7,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject xrOrigin;
     [SerializeField] private InputActionReference thumbstickPressAction;
     [SerializeField] private InputActionReference moveAction;
-    [SerializeField] private InputActionReference jumpAction; // NUEVO
+    [SerializeField] private InputActionReference jumpAction;
     [SerializeField] private CharacterController controller;
     [SerializeField] private float moveThreshold = 0.1f;
     [SerializeField] private UIUpdater uiUpdater;
 
     // --- Sprint ---
-    public float staminaCooldown = 1f;
-    public float staminaCooldownTimer;
-    [SerializeField] private bool pulsado;
+    private float staminaCooldown = 1f;
+    private float staminaCooldownTimer;
+    private bool pulsado;
     private bool agotado;
-    public bool corriendo;
+    private bool corriendo;
 
     // --- Jump ---
     [SerializeField] private LayerMask groundLayer;
