@@ -304,29 +304,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7850819154157568618, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
   m_PrefabInstance: {fileID: 1915297973535000834}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &491171444
-CapsuleCollider:
+--- !u!54 &491171450
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491171439}
-  m_Material: {fileID: 0}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.9812008
-  m_Height: 3.3034472
-  m_Direction: 1
-  m_Center: {x: -0.000000059604645, y: 0.1767767, z: 0.00000011920929}
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &742970507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,6 +346,38 @@ PrefabInstance:
     - target: {fileID: 1937570934422715647, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020665183085742314, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 443
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020665183085742314, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 692
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124880263256493560, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -426
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124880263256493560, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 623
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588496513831126923, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 443
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588496513831126923, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 623
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653742484828752160, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -426
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653742484828752160, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 692
       objectReference: {fileID: 0}
     - target: {fileID: 7545296846328095610, guid: 01aea89b4f1cd4f4e8a4949a9ea094c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -428,7 +464,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.49288732
+  m_Radius: 1
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -677,7 +713,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7850819154157568618, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 491171444}
+      addedObject: {fileID: 491171450}
   m_SourcePrefab: {fileID: 100100000, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
 --- !u!114 &3127728407676174906
 MonoBehaviour:
