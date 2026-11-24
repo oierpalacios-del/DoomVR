@@ -6,6 +6,10 @@ public class EnemyBehaivor : MonoBehaviour
     public EnemyData enemyData;
     private Transform player;
 
+    [SerializeField] private GameObject balaPrefab;
+    [SerializeField] private Transform salidaPistola;
+    [SerializeField] private float bulletSpeed = 30f;
+
     [SerializeField] private NavMeshAgent agent;
     
     float attackTimer = 1f;
@@ -25,23 +29,28 @@ public class EnemyBehaivor : MonoBehaviour
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
         dist = Vector3.Distance(transform.position, player.position);
-        if (enemyData.vuela)
+        if(player != null)
         {
-            if (player != null)
+            if(dist > enemyData.stopRange && dist < enemyData.detectRange)
             {
-                if (dist > enemyData.stopRange && dist < enemyData.detectRange)
+                if (enemyData.vuela)
                 {
                     transform.position = Vector3.MoveTowards(
                         transform.position, player.position, enemyData.speed * Time.deltaTime);
                     transform.LookAt(player);
                 }
+                else
+                {
+                    agent.SetDestination(player.position);
+                }
             }
-        }
-        else
-        {
-            if (player != null && dist > enemyData.stopRange && dist < enemyData.detectRange)
+            else if(dist < enemyData.stopRange)
             {
-                agent.SetDestination(player.position);
+                agent.isStopped = true;
+                if (enemyData.dispara)
+                {
+                    Disparar();
+                }
             }
         }
     }
@@ -53,6 +62,20 @@ public class EnemyBehaivor : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Disparar()
+    {
+        if(attackTimerCooldown <= 0)
+        {
+            GameObject balaInstance = Instantiate(balaPrefab, salidaPistola.position, salidaPistola.rotation);
+            attackTimerCooldown = attackTimer;
+            Rigidbody rb = balaInstance.GetComponent<Rigidbody>();
+
+            if (rb != null)
+                rb.linearVelocity = salidaPistola.forward * bulletSpeed;
+
+            Destroy(balaInstance, 5f);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("bullet"))
@@ -61,7 +84,6 @@ public class EnemyBehaivor : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-
     private void OnTriggerStay(Collider other)
     {
         if (attackTimerCooldown <= 0)

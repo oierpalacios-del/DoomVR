@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e4df0266e5acb44a2e7f8e5acb7b13, type: 3}
+  m_Name: Dron de Disparo
+  m_EditorClassIdentifier: 
+  nombreEnemigo: Dron
+  descripcionEnemigo: Dron que dispara
+  vidaMax: 3
+  vidaActual: 3
+  speed: 5
+  damageMin: 1
+  damageMax: 3
+  detectRange: 120
+  stopRange: 10
+  prefab: {fileID: 7850819154157568618, guid: 1a047a8a795c8fb409af94fa234d1a48, type: 3}
+  vuela: 1
+  dispara: 1
