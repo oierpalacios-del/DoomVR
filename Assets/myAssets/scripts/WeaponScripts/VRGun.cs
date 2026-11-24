@@ -26,7 +26,7 @@ public class VRGun : MonoBehaviour
         grab.activated.RemoveListener(Shoot);
     }
 
-    void Shoot(ActivateEventArgs args)
+    public void Shoot(ActivateEventArgs args)
     {
         Debug.Log("¡DISPARO ACTIVADO!");
 
