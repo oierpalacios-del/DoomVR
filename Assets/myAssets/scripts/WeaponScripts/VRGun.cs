@@ -28,7 +28,6 @@ public class VRGun : MonoBehaviour
 
     public void Shoot(ActivateEventArgs args)
     {
-        Debug.Log("¡DISPARO ACTIVADO!");
 
         if (bulletPrefab == null || muzzle == null)
             return;

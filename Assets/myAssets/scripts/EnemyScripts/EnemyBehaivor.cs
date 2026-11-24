@@ -66,15 +66,31 @@ public class EnemyBehaivor : MonoBehaviour
     {
         if(attackTimerCooldown <= 0)
         {
-            GameObject balaInstance = Instantiate(balaPrefab, salidaPistola.position, salidaPistola.rotation);
+          
             attackTimerCooldown = attackTimer;
+
+            if (balaPrefab == null || salidaPistola == null)
+                return;
+            Vector3 extraRotation = new Vector3(270f, 0f, 0f);
+            Quaternion rotation = Quaternion.Euler(extraRotation) * salidaPistola.rotation;
+            GameObject balaInstance = Instantiate(
+                balaPrefab,
+                salidaPistola.position,
+                rotation
+            );
+
             Rigidbody rb = balaInstance.GetComponent<Rigidbody>();
 
             if (rb != null)
                 rb.linearVelocity = salidaPistola.forward * bulletSpeed;
 
             Destroy(balaInstance, 5f);
+
         }
+
+       
+
+       
     }
     private void OnCollisionEnter(Collision collision)
     {
